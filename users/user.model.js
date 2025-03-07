@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-module.exports = module;
+module.exports = model;
 
 function model(sequelize) {
     const attributes = {
@@ -13,7 +13,7 @@ function model(sequelize) {
     };
 
     const options = {
-        defaulrScope: {
+        defaultScope: {
             attributes: { exclude: ['passwordHash']}
         },
         scopes: {

@@ -14,3 +14,5 @@ function validateRequest(req, next, schema) {
         next();
     }
 }
+
+module.exports = validateRequest;

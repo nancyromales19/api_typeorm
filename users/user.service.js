@@ -13,6 +13,10 @@ async function getAll() {
     return await db.User.findAll();
 }
 
+async function getById(id) {
+    return await getUser(id);
+}
+
 async function create(params) {
     if (await db.User.findOne({ where: { email: params.email } })) {
         throw 'Email "' + params.email + '" is already registered';

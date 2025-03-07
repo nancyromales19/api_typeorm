@@ -33,6 +33,12 @@ function create(req, res, next) {
         .catch(next);
 }
 
+function update(req, res, next) {
+    userService.update(req.params.id, req.body)
+        .then(() => res.json({ message: 'User updated' }))
+        .catch(next);   
+}
+
 function _delete(req, res, next) {
     userService.delete(req.params.id)
         .then(() => res.json({ message: 'User deleted' }))
