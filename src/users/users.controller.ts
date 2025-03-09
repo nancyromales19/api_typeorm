@@ -1,8 +1,9 @@
 import express, { Request, Response, NextFunction } from "express";
 import { UserService } from "./user.service";
-import Joi from "joi";
-import { validateRequest } from "../middleware/validate-request";
-import { Role } from "../helpers/role";
+import Joi, { ObjectSchema } from "joi";  // Combine imports from Joi
+import { Role } from "../_helpers/role";
+
+
 
 const router = express.Router();
 const userService = new UserService();
@@ -87,4 +88,13 @@ function updateSchema(req: Request, res: Response, next: NextFunction) {
         confirmPassword: Joi.string().valid(Joi.ref("password")),
     });
     validateRequest(req, next, schema);
+}
+
+export function validateRequest(req: Request, next: NextFunction, schema: ObjectSchema) {
+    const { error } = schema.validate(req.body);
+    if (error) {
+        next(error);
+    } else {
+        next();
+    }
 }

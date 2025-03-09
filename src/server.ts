@@ -1,28 +1,37 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-import userRoutes from "./users/users.controller"; // Importing the user routes
-import { errorHandler } from "./middleware/error-handler";
+import "reflect-metadata";
+import { AppDataSource } from "./_helpers/db";
+import { errorHandler } from "./_middleware/error-handler";
+import * as dotenv from "dotenv";
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Parse JSON requests
+// Initialize TypeORM DataSource
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization:", err);
+  });
 
-// Routes
-app.use("/users", userRoutes);
+// Middlewares
+app.use(cors());
+app.use(express.json());
 
-// Health Check Route
-app.get("/", (req: Request, res: Response) => {
-    res.send("API is running 🚀");
+// Example route (for testing)
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
-// Error Handler Middleware
+// ⬇️ Make sure errorHandler is the LAST middleware
 app.use(errorHandler);
 
-// Start Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

@@ -9,6 +9,7 @@ export const AppDataSource = new DataSource({
   database: "node-mysql-crud-api",
   entities: ["src/entities/*.ts"],
   synchronize: true,
+  logging: true
 });
 
 AppDataSource.initialize();
