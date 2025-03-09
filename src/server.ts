@@ -1,3 +1,4 @@
+import "./_helpers/db"; 
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import "reflect-metadata";
