@@ -27,7 +27,7 @@ export class UserService {
     
         const user = this.userRepository.create(params);
     
-        // Check if password is provided before hashing
+        
         if (params.password) {
             user.passwordHash = await bcrypt.hash(params.password, 10);
         } else {
@@ -48,7 +48,7 @@ export class UserService {
             }
         }
     
-        // Check and hash the password if it exists
+        
         if (params.password) {
             params.passwordHash = await bcrypt.hash(params.password, 10);
         }

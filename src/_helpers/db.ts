@@ -33,7 +33,7 @@ export const AppDataSource = new DataSource({
 });
 
 async function initializeDatabase() {
-    await createDatabaseIfNotExists(); // Ensure DB exists **before** TypeORM initializes.
+    await createDatabaseIfNotExists(); 
 
     console.log("Initializing TypeORM Data Source...");
     try {

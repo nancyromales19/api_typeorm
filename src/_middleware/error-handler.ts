@@ -4,7 +4,7 @@ export function errorHandler(
   err: any, 
   req: Request, 
   res: Response, 
-  next: NextFunction // Ensure all four parameters are included
+  next: NextFunction 
 ): void { // Explicit return type
     console.error(err);
 

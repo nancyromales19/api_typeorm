@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { UserService } from "./user.service";
-import Joi, { ObjectSchema } from "joi";  // Combine imports from Joi
+import Joi, { ObjectSchema } from "joi";  
 import { Role } from "../_helpers/role";
 
 
@@ -8,7 +8,7 @@ import { Role } from "../_helpers/role";
 const router = express.Router();
 const userService = new UserService();
 
-// Routes
+
 router.get("/", getAll);
 router.get("/:id", getById);
 router.post("/", createSchema, create);
@@ -17,7 +17,7 @@ router.delete("/:id", _delete);
 
 export default router;
 
-// Controller Functions
+
 async function getAll(req: Request, res: Response, next: NextFunction) {
     try {
         const users = await userService.getAll();
@@ -63,7 +63,7 @@ async function _delete(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-// Validation Schemas
+
 function createSchema(req: Request, res: Response, next: NextFunction) {
     const schema = Joi.object({
         title: Joi.string().required(),
